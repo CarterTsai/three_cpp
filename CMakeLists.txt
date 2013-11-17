@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project(three)
+project(three C CXX)
 
 set(CMAKE_DEBUG_POSTFIX "d")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)

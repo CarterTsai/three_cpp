@@ -19,14 +19,21 @@ namespace detail {
 
 inline std::vector<unsigned char> load( const std::string& file ) {
   FILE* fp = fopen( file.c_str(), "rb" );
+  size_t result = 0; 
   if (!fp) return std::vector<unsigned char>();
 
   fseek( fp, 0, SEEK_END );
-  int size = ftell( fp );
+  long size = ftell( fp );
   fseek( fp, 0, SEEK_SET );
 
   std::vector<unsigned char> buffer( size );
-  fread( buffer.data(), 1, size, fp );
+  result = fread( buffer.data(), 1, size, fp );
+
+  if (result != (size_t) size) {
+      fputs("Reading error", stderr); 
+      exit(3);
+  }
+
   fclose( fp );
   return buffer;
 }
